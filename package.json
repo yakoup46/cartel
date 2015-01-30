@@ -1,0 +1,11 @@
+{
+  "name": "cartel",
+  "version": "1.0.0",
+  "description": "cartel",
+  "dependencies": {
+    "express": "^4.11.1",
+    "jquery": "^2.1.3",
+    "sass": "^0.5.0",
+    "socket.io": "^1.3.2"
+  }
+}
