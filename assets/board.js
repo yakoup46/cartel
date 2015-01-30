@@ -12,6 +12,16 @@ $(function(){
 
         this.opts = {};
 
+        this.colors = {
+            'purple' : '#9b59b6',
+            'blue' : '#3498db',
+            'pink' : '#ff0099',
+            'orange' : '#ff9900',
+            'red' : '#c0392b',
+            'yellow' : '',
+            'green' : '#27ae60'
+        }
+
         this.c = $('#cartel');
         this.ctx = (this.c)[0].getContext('2d');
 
@@ -73,6 +83,60 @@ $(function(){
                 _.moveTo(960, start + increment * i);
                 _.lineTo(960 - eighth, start + increment * i);
                 _.stroke();
+            }
+
+            var side = 0;
+            var j = 0;
+            var x,y,w,h;
+
+            for (var i = 0; i < spaces.length; i++) {
+                var cur = spaces[i];
+                var type = cur.type;
+
+                if (i % 9 === 0 && i > 0) {
+                    side++;
+                    j = 0;
+                }
+
+                if (type === 'property') {
+                    _.closePath();
+                    _.fillStyle = this.colors[cur.color];
+
+                    switch (side) {
+                        case 0:
+                            x = 960 - eighth - (increment * (j + 1));
+                            y = 960 - increment;
+                            w = increment;
+                            h = increment - eighth;
+                            break;
+                        case 1:
+                            x = eighth;
+                            y = 960 - eighth - (increment * (j + 1));
+                            w = increment - eighth;
+                            h = increment;
+                            break;
+                        case 2:
+                            x = eighth + (increment * j);
+                            y = eighth;
+                            w = increment;
+                            h = increment - eighth;
+                            break;
+                        case 3:
+                            x = 960 - increment;
+                            y = eighth + (increment * j);
+                            w = increment - eighth;
+                            h = increment;
+                            break;
+                    }
+
+                    _.rect(x, y, w, h);
+
+                    _.fill();
+                    _.stroke();
+                    _.beginPath();
+                }
+
+                j++;
             }
         }
 
