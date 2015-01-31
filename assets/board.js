@@ -18,19 +18,53 @@ $(function(){
             'pink' : '#ff0099',
             'orange' : '#ff9900',
             'red' : '#c0392b',
-            'yellow' : '',
-            'green' : '#27ae60'
+            'yellow' : '#f1c40f',
+            'green' : '#27ae60',
+            'darkblue' : '#2c3e50',
+            'black' : '#000000'
         }
 
-        this.c = $('#cartel');
-        this.ctx = (this.c)[0].getContext('2d');
+        this.c = $('#cartel')[0];
+        this.ctx = this.c.getContext('2d');
+        this.cw = this.c.width;
+        this.ch = this.c.height;
 
         this.init = function(el, opts){
             this.opts = $.extend(this.opts, opts);
             this.drawBoard();
+            this.rotateBoard();
 
             return this;
         };
+
+        this.rotateBoard = function(){
+            $('#rotate > a').on('click', function(e){
+                e.preventDefault();
+
+                var rotating = false;
+
+                if (!rotating) {
+                    rotating = true;
+                    var canvasData = new Image();
+                    canvasData.src = _.c.toDataURL();
+
+                    canvasData.onload = function(){
+                        _.c.width = _.cw;
+                        _.c.height = _.ch;
+                        _.cw = _.c.width;
+                        _.ch = _.c.height;
+
+                        _.ctx.save();
+                        _.ctx.translate(_.cw, _.ch / _.cw);
+                        _.ctx.rotate(Math.PI / 2);
+                        _.ctx.drawImage(canvasData, 0, 0);
+                        _.ctx.restore();
+                        canvasData = null;
+                        rotating = false;
+                    }
+                }
+            });
+        }
 
         this.drawBoard = function(){
             var eighth = 960 / 8;
@@ -87,11 +121,20 @@ $(function(){
 
             var side = 0;
             var j = 0;
+            var maxWidth = increment - 10;
             var x,y,w,h;
 
+            _.font = '12px Arial';
+            _.textAlign = 'center';
+
+            // property colors and names
             for (var i = 0; i < spaces.length; i++) {
                 var cur = spaces[i];
                 var type = cur.type;
+                var text = cur.name;
+                var price = cur.price + ' Pesos' || 0;
+
+                _.fillStyle = this.colors.black;
 
                 if (i % 9 === 0 && i > 0) {
                     side++;
@@ -100,7 +143,6 @@ $(function(){
 
                 if (type === 'property') {
                     _.closePath();
-                    _.fillStyle = this.colors[cur.color];
 
                     switch (side) {
                         case 0:
@@ -108,27 +150,52 @@ $(function(){
                             y = 960 - increment;
                             w = increment;
                             h = increment - eighth;
+
+                            _.fillText(text, x + increment / 2, y + 15, maxWidth);
+                            _.fillText(price, x + increment / 2, y + increment - 5, maxWidth);
                             break;
                         case 1:
                             x = eighth;
                             y = 960 - eighth - (increment * (j + 1));
                             w = increment - eighth;
                             h = increment;
+
+                            _.save();
+                            _.translate(x, y);
+                            _.rotate(Math.PI / 2);
+                            _.fillText(text, increment / 2, increment - 25, maxWidth);
+                            _.fillText(price, increment / 2, increment + 35, maxWidth);
+                            _.restore();
                             break;
                         case 2:
                             x = eighth + (increment * j);
                             y = eighth;
                             w = increment;
                             h = increment - eighth;
+
+                            _.save();
+                            _.translate(x, y);
+                            _.rotate(Math.PI);
+                            _.fillText(text, -increment / 2, increment - 25, maxWidth);
+                            _.fillText(price, -increment / 2, increment + 35, maxWidth);
+                            _.restore();
                             break;
                         case 3:
                             x = 960 - increment;
                             y = eighth + (increment * j);
                             w = increment - eighth;
                             h = increment;
+
+                            _.save();
+                            _.translate(x, y);
+                            _.rotate(-Math.PI / 2);
+                            _.fillText(text, -increment / 2, increment - 60, maxWidth);
+                            _.fillText(price, -increment / 2, increment - 5, maxWidth);
+                            _.restore();
                             break;
                     }
 
+                    _.fillStyle = this.colors[cur.color];
                     _.rect(x, y, w, h);
 
                     _.fill();
@@ -139,7 +206,7 @@ $(function(){
                 j++;
             }
         }
-
+        _.ctx.save();
     };
 
     $.cartel = function(o) {
