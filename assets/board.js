@@ -115,6 +115,174 @@ $(function(){
             }
         }
 
+        this.drawProperty = function(eighth, ctx, increment, side, i, j, cur, maxWidth){
+            var text = cur.name;
+            var price = cur.price + ' Pesos' || 0;
+
+            ctx.closePath();
+
+            switch (side) {
+                case 0:
+                    x = this.cw - eighth - (increment * (j + 1));
+                    y = this.cw - increment;
+                    w = increment;
+                    h = increment - eighth;
+
+                    ctx.fillText(text, x + increment / 2, y + 15, maxWidth);
+                    ctx.fillText(price, x + increment / 2, y + increment - 5, maxWidth);
+                    break;
+                case 1:
+                    x = eighth;
+                    y = this.cw - eighth - (increment * (j + 1));
+                    w = increment - eighth;
+                    h = increment;
+
+                    ctx.save();
+                    ctx.translate(x, y);
+                    ctx.rotate(Math.PI / 2);
+                    ctx.fillText(text, increment / 2, increment - 25, maxWidth);
+                    ctx.fillText(price, increment / 2, increment + 35, maxWidth);
+                    ctx.restore();
+                    break;
+                case 2:
+                    x = eighth + (increment * j);
+                    y = eighth;
+                    w = increment;
+                    h = increment - eighth;
+
+                    ctx.save();
+                    ctx.translate(x, y);
+                    ctx.rotate(Math.PI);
+                    ctx.fillText(text, -increment / 2, increment - 25, maxWidth);
+                    ctx.fillText(price, -increment / 2, increment + 35, maxWidth);
+                    ctx.restore();
+                    break;
+                case 3:
+                    x = this.cw - increment;
+                    y = eighth + (increment * j);
+                    w = increment - eighth;
+                    h = increment;
+
+                    ctx.save();
+                    ctx.translate(x, y);
+                    ctx.rotate(-Math.PI / 2);
+                    ctx.fillText(text, -increment / 2, increment - 60, maxWidth);
+                    ctx.fillText(price, -increment / 2, increment - 5, maxWidth);
+                    ctx.restore();
+                    break;
+            }
+
+            ctx.fillStyle = this.colors[cur.color];
+            ctx.rect(x, y, w, h);
+
+            ctx.fill();
+            ctx.stroke();
+            ctx.beginPath();
+        }
+
+        this.drawPickup = function(eighth, ctx, increment, side, i, j, cur, maxWidth){
+            var words = cur.name.split(' ');
+
+            switch (side) {
+                case 0:
+                    x = this.cw - eighth - (increment * (j + 1));
+                    y = this.cw - increment;
+
+                    ctx.fillText(words[0], x + increment / 2, y + increment / 2, maxWidth);
+                    ctx.fillText(words[1], x + increment / 2, y + increment / 2 + 15, maxWidth);
+                    break;
+                case 1:
+                    x = eighth;
+                    y = this.cw - eighth - (increment * (j + 1));
+
+                    ctx.save();
+                    ctx.translate(x, y);
+                    ctx.rotate(Math.PI / 2);
+                    ctx.fillText(words[0], increment / 2, increment , maxWidth);
+                    ctx.fillText(words[1], increment / 2, increment + 15, maxWidth);
+                    ctx.restore();
+                    break;
+                case 2:
+                    x = eighth + (increment * j);
+                    y = eighth;
+
+                    ctx.save();
+                    ctx.translate(x, y);
+                    ctx.rotate(Math.PI);
+                    ctx.fillText(words[0], -increment / 2, increment, maxWidth);
+                    ctx.fillText(words[1], -increment / 2, increment + 15, maxWidth);
+                    ctx.restore();
+                    break;
+                case 3:
+                    x = this.cw - increment;
+                    y = eighth + (increment * j);
+
+                    ctx.save();
+                    ctx.translate(x, y);
+                    ctx.rotate(-Math.PI / 2);
+                    ctx.fillText(words[0], -increment / 2, increment / 2, maxWidth);
+                    ctx.fillText(words[1], -increment / 2, increment / 2 + 15, maxWidth);
+                    ctx.restore();
+                    break;
+            }
+        }
+
+        this.drawTransport = function(eighth, ctx, increment, side, i, j, cur, maxWidth){
+            var transport = 'TRANSPORT';
+            var words = cur.name.split(' ');
+
+            switch (side) {
+                case 0:
+                    x = this.cw - eighth - (increment * (j + 1));
+                    y = this.cw - increment;
+
+                    ctx.fillText(transport, x + increment / 2, y - 20, maxWidth);
+                    for (var z = 0; z < words.length; z++) {
+                        ctx.fillText(words[z], x + increment / 2, y + increment / 3 + z * 12, maxWidth);
+                    }
+                    break;
+                case 1:
+                    x = eighth;
+                    y = this.cw - eighth - (increment * (j + 1));
+
+                    ctx.save();
+                    ctx.translate(x, y);
+                    ctx.rotate(Math.PI / 2);
+                    ctx.fillText(transport, increment / 2, increment - 60, maxWidth);
+                    for (var z = 0; z < words.length; z++) {
+                        ctx.fillText(words[z], increment / 2, increment / 1.3 + z * 12, maxWidth);
+                    }
+                    ctx.restore();
+                    break;
+                case 2:
+                    x = eighth + (increment * j);
+                    y = eighth;
+
+                    ctx.save();
+                    ctx.translate(x, y);
+                    ctx.rotate(Math.PI);
+                    ctx.fillText(transport, -increment / 2, increment - 60, maxWidth);
+                    for (var z = 0; z < words.length; z++) {
+                        ctx.fillText(words[z], -increment / 2, increment - 15 + z * 12, maxWidth);
+                    }
+                    ctx.restore();
+                    break;
+                case 3:
+                    x = this.cw - increment;
+                    y = eighth + (increment * j);
+
+                    ctx.save();
+                    ctx.translate(x, y);
+                    ctx.rotate(-Math.PI / 2);
+                    ctx.fillText(transport, -increment / 2, -increment + 60, maxWidth);
+                    for (var z = 0; z < words.length; z++) {
+                        ctx.fillText(words[z], -increment / 2, increment / 2 - 15 + z * 12, maxWidth);
+                    }
+                    ctx.restore();
+                    break;
+                }
+        }
+
         this.drawPieces = function(eighth, ctx, increment){
             var side = 0;
             var j = 0;
@@ -128,8 +296,6 @@ $(function(){
             for (var i = 0; i < spaces.length; i++) {
                 var cur = spaces[i];
                 var type = cur.type;
-                var text = cur.name;
-                var price = cur.price + ' Pesos' || 0;
 
                 ctx.fillStyle = this.colors.black;
 
@@ -138,70 +304,58 @@ $(function(){
                     j = 0;
                 }
 
-                if (type === 'property') {
-                    ctx.closePath();
-
-                    switch (side) {
-                        case 0:
-                            x = this.cw - eighth - (increment * (j + 1));
-                            y = this.cw - increment;
-                            w = increment;
-                            h = increment - eighth;
-
-                            ctx.fillText(text, x + increment / 2, y + 15, maxWidth);
-                            ctx.fillText(price, x + increment / 2, y + increment - 5, maxWidth);
-                            break;
-                        case 1:
-                            x = eighth;
-                            y = this.cw - eighth - (increment * (j + 1));
-                            w = increment - eighth;
-                            h = increment;
-
-                            ctx.save();
-                            ctx.translate(x, y);
-                            ctx.rotate(Math.PI / 2);
-                            ctx.fillText(text, increment / 2, increment - 25, maxWidth);
-                            ctx.fillText(price, increment / 2, increment + 35, maxWidth);
-                            ctx.restore();
-                            break;
-                        case 2:
-                            x = eighth + (increment * j);
-                            y = eighth;
-                            w = increment;
-                            h = increment - eighth;
-
-                            ctx.save();
-                            ctx.translate(x, y);
-                            ctx.rotate(Math.PI);
-                            ctx.fillText(text, -increment / 2, increment - 25, maxWidth);
-                            ctx.fillText(price, -increment / 2, increment + 35, maxWidth);
-                            ctx.restore();
-                            break;
-                        case 3:
-                            x = this.cw - increment;
-                            y = eighth + (increment * j);
-                            w = increment - eighth;
-                            h = increment;
-
-                            ctx.save();
-                            ctx.translate(x, y);
-                            ctx.rotate(-Math.PI / 2);
-                            ctx.fillText(text, -increment / 2, increment - 60, maxWidth);
-                            ctx.fillText(price, -increment / 2, increment - 5, maxWidth);
-                            ctx.restore();
-                            break;
-                    }
-
-                    ctx.fillStyle = this.colors[cur.color];
-                    ctx.rect(x, y, w, h);
-
-                    ctx.fill();
-                    ctx.stroke();
-                    ctx.beginPath();
+                switch (type) {
+                    case 'property':
+                        this.drawProperty(eighth, ctx, increment, side, i, j, cur, maxWidth);
+                        break;
+                    case 'pickup':
+                        this.drawPickup(eighth, ctx, increment, side, i, j, cur, maxWidth);
+                        break;
+                    case 'utility':
+                        break;
+                    case 'transport':
+                        this.drawTransport(eighth, ctx, increment, side, i, j, cur, maxWidth);
+                        break;
+                    case 'tax':
+                        break;
                 }
 
                 j++;
             }
+        }
+
+        this.drawCorners = function(ctx){
+            ctx.font = '24px Arial';
+            ctx.fillStyle = this.colors.black;
+
+            ctx.save();
+
+            // Go
+            ctx.translate(this.cw - 60, this.ch - 60);
+            ctx.rotate(Math.PI / 4);
+            ctx.fillText('Go Bitch', 0, 0);
+            ctx.restore();
+
+            // Jail
+            ctx.save();
+            ctx.translate(60, this.ch - 60);
+            ctx.rotate(-Math.PI / 4);
+            ctx.fillText('Jail Hombre', 0, 0);
+            ctx.restore();
+
+            // "Free Parking"
+            ctx.save();
+            ctx.translate(60, 60);
+            ctx.rotate(-Math.PI / 4);
+            ctx.fillText('Loot', 0, 0);
+            ctx.restore();
+
+            // Go to Jail
+            ctx.save();
+            ctx.translate(this.cw - 60, 60);
+            ctx.rotate(Math.PI / 4);
+            ctx.fillText('Busted Bitch', 0, 0);
+            ctx.restore();
         }
 
         this.drawBoard = function(){
@@ -215,6 +369,7 @@ $(function(){
             this.drawCrossLines(eighth, ctx);
             this.drawDividers(eighth, ctx, increment);
             this.drawPieces(eighth, ctx, increment);
+            this.drawCorners(ctx);
 
             ctx.save();
         }
