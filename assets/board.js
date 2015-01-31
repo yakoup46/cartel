@@ -66,66 +66,63 @@ $(function(){
             });
         }
 
-        this.drawBoard = function(){
-            var eighth = this.cw / 8;
-            var _ = this.ctx;
-
-            _.beginPath();
-            _.lineWidth = 2;
-
+        this.drawCrossLines = function(eighth, ctx){
             // top left to bottom left
-            _.moveTo(eighth, 0);
-            _.lineTo(eighth, this.cw);
-            _.stroke();
+            ctx.moveTo(eighth, 0);
+            ctx.lineTo(eighth, this.cw);
+            ctx.stroke();
 
             // top left to top right
-            _.moveTo(0, eighth);
-            _.lineTo(this.cw, eighth);
-            _.stroke();
+            ctx.moveTo(0, eighth);
+            ctx.lineTo(this.cw, eighth);
+            ctx.stroke();
 
             // top right to bottom right
-            _.moveTo(this.cw - eighth, 0);
-            _.lineTo(this.cw - eighth, this.cw);
-            _.stroke();
+            ctx.moveTo(this.cw - eighth, 0);
+            ctx.lineTo(this.cw - eighth, this.cw);
+            ctx.stroke();
 
             // bottom left to bottom right
-            _.moveTo(0, this.cw - eighth);
-            _.lineTo(this.cw, this.cw - eighth);
-            _.stroke();
+            ctx.moveTo(0, this.cw - eighth);
+            ctx.lineTo(this.cw, this.cw - eighth);
+            ctx.stroke();
+        }
 
+        this.drawDividers = function(eighth, ctx, increment){
             var start = eighth;
-            var increment = this.cw / 12;
 
             // pieces
             for (var i = 0; i < 9; i++) {
                 // bottom side
-                _.moveTo(start + increment * i, this.cw);
-                _.lineTo(start + increment * i, this.cw - eighth);
-                _.stroke();
+                ctx.moveTo(start + increment * i, this.cw);
+                ctx.lineTo(start + increment * i, this.cw - eighth);
+                ctx.stroke();
 
                 // top side
-                _.moveTo(start + increment * i, 0);
-                _.lineTo(start + increment * i, eighth);
-                _.stroke();
+                ctx.moveTo(start + increment * i, 0);
+                ctx.lineTo(start + increment * i, eighth);
+                ctx.stroke();
 
                 // left side
-                _.moveTo(0, start + increment * i);
-                _.lineTo(eighth, start + increment * i);
-                _.stroke();
+                ctx.moveTo(0, start + increment * i);
+                ctx.lineTo(eighth, start + increment * i);
+                ctx.stroke();
 
                 // right side
-                _.moveTo(this.cw, start + increment * i);
-                _.lineTo(this.cw - eighth, start + increment * i);
-                _.stroke();
+                ctx.moveTo(this.cw, start + increment * i);
+                ctx.lineTo(this.cw - eighth, start + increment * i);
+                ctx.stroke();
             }
+        }
 
+        this.drawPieces = function(eighth, ctx, increment){
             var side = 0;
             var j = 0;
             var maxWidth = increment - 10;
             var x,y,w,h;
 
-            _.font = '12px Arial';
-            _.textAlign = 'center';
+            ctx.font = '12px Arial';
+            ctx.textAlign = 'center';
 
             // property colors and names
             for (var i = 0; i < spaces.length; i++) {
@@ -134,7 +131,7 @@ $(function(){
                 var text = cur.name;
                 var price = cur.price + ' Pesos' || 0;
 
-                _.fillStyle = this.colors.black;
+                ctx.fillStyle = this.colors.black;
 
                 if (i % 9 === 0 && i > 0) {
                     side++;
@@ -142,7 +139,7 @@ $(function(){
                 }
 
                 if (type === 'property') {
-                    _.closePath();
+                    ctx.closePath();
 
                     switch (side) {
                         case 0:
@@ -151,8 +148,8 @@ $(function(){
                             w = increment;
                             h = increment - eighth;
 
-                            _.fillText(text, x + increment / 2, y + 15, maxWidth);
-                            _.fillText(price, x + increment / 2, y + increment - 5, maxWidth);
+                            ctx.fillText(text, x + increment / 2, y + 15, maxWidth);
+                            ctx.fillText(price, x + increment / 2, y + increment - 5, maxWidth);
                             break;
                         case 1:
                             x = eighth;
@@ -160,12 +157,12 @@ $(function(){
                             w = increment - eighth;
                             h = increment;
 
-                            _.save();
-                            _.translate(x, y);
-                            _.rotate(Math.PI / 2);
-                            _.fillText(text, increment / 2, increment - 25, maxWidth);
-                            _.fillText(price, increment / 2, increment + 35, maxWidth);
-                            _.restore();
+                            ctx.save();
+                            ctx.translate(x, y);
+                            ctx.rotate(Math.PI / 2);
+                            ctx.fillText(text, increment / 2, increment - 25, maxWidth);
+                            ctx.fillText(price, increment / 2, increment + 35, maxWidth);
+                            ctx.restore();
                             break;
                         case 2:
                             x = eighth + (increment * j);
@@ -173,12 +170,12 @@ $(function(){
                             w = increment;
                             h = increment - eighth;
 
-                            _.save();
-                            _.translate(x, y);
-                            _.rotate(Math.PI);
-                            _.fillText(text, -increment / 2, increment - 25, maxWidth);
-                            _.fillText(price, -increment / 2, increment + 35, maxWidth);
-                            _.restore();
+                            ctx.save();
+                            ctx.translate(x, y);
+                            ctx.rotate(Math.PI);
+                            ctx.fillText(text, -increment / 2, increment - 25, maxWidth);
+                            ctx.fillText(price, -increment / 2, increment + 35, maxWidth);
+                            ctx.restore();
                             break;
                         case 3:
                             x = this.cw - increment;
@@ -186,27 +183,41 @@ $(function(){
                             w = increment - eighth;
                             h = increment;
 
-                            _.save();
-                            _.translate(x, y);
-                            _.rotate(-Math.PI / 2);
-                            _.fillText(text, -increment / 2, increment - 60, maxWidth);
-                            _.fillText(price, -increment / 2, increment - 5, maxWidth);
-                            _.restore();
+                            ctx.save();
+                            ctx.translate(x, y);
+                            ctx.rotate(-Math.PI / 2);
+                            ctx.fillText(text, -increment / 2, increment - 60, maxWidth);
+                            ctx.fillText(price, -increment / 2, increment - 5, maxWidth);
+                            ctx.restore();
                             break;
                     }
 
-                    _.fillStyle = this.colors[cur.color];
-                    _.rect(x, y, w, h);
+                    ctx.fillStyle = this.colors[cur.color];
+                    ctx.rect(x, y, w, h);
 
-                    _.fill();
-                    _.stroke();
-                    _.beginPath();
+                    ctx.fill();
+                    ctx.stroke();
+                    ctx.beginPath();
                 }
 
                 j++;
             }
         }
-        _.ctx.save();
+
+        this.drawBoard = function(){
+            var eighth = this.cw / 8;
+            var increment = this.cw / 12;
+            var ctx = this.ctx;
+
+            ctx.beginPath();
+            ctx.lineWidth = 2;
+
+            this.drawCrossLines(eighth, ctx);
+            this.drawDividers(eighth, ctx, increment);
+            this.drawPieces(eighth, ctx, increment);
+
+            ctx.save();
+        }
     };
 
     $.cartel = function(o) {
