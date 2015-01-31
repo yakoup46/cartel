@@ -67,7 +67,7 @@ $(function(){
         }
 
         this.drawBoard = function(){
-            var eighth = 960 / 8;
+            var eighth = this.cw / 8;
             var _ = this.ctx;
 
             _.beginPath();
@@ -75,32 +75,32 @@ $(function(){
 
             // top left to bottom left
             _.moveTo(eighth, 0);
-            _.lineTo(eighth ,960);
+            _.lineTo(eighth, this.cw);
             _.stroke();
 
             // top left to top right
             _.moveTo(0, eighth);
-            _.lineTo(960, eighth);
+            _.lineTo(this.cw, eighth);
             _.stroke();
 
             // top right to bottom right
-            _.moveTo(960 - eighth, 0);
-            _.lineTo(960 - eighth, 960);
+            _.moveTo(this.cw - eighth, 0);
+            _.lineTo(this.cw - eighth, this.cw);
             _.stroke();
 
             // bottom left to bottom right
-            _.moveTo(0, 960 - eighth);
-            _.lineTo(960, 960 - eighth);
+            _.moveTo(0, this.cw - eighth);
+            _.lineTo(this.cw, this.cw - eighth);
             _.stroke();
 
             var start = eighth;
-            var increment = 960 / 12;
+            var increment = this.cw / 12;
 
             // pieces
             for (var i = 0; i < 9; i++) {
                 // bottom side
-                _.moveTo(start + increment * i, 960);
-                _.lineTo(start + increment * i, 960 - eighth);
+                _.moveTo(start + increment * i, this.cw);
+                _.lineTo(start + increment * i, this.cw - eighth);
                 _.stroke();
 
                 // top side
@@ -114,8 +114,8 @@ $(function(){
                 _.stroke();
 
                 // right side
-                _.moveTo(960, start + increment * i);
-                _.lineTo(960 - eighth, start + increment * i);
+                _.moveTo(this.cw, start + increment * i);
+                _.lineTo(this.cw - eighth, start + increment * i);
                 _.stroke();
             }
 
@@ -146,8 +146,8 @@ $(function(){
 
                     switch (side) {
                         case 0:
-                            x = 960 - eighth - (increment * (j + 1));
-                            y = 960 - increment;
+                            x = this.cw - eighth - (increment * (j + 1));
+                            y = this.cw - increment;
                             w = increment;
                             h = increment - eighth;
 
@@ -156,7 +156,7 @@ $(function(){
                             break;
                         case 1:
                             x = eighth;
-                            y = 960 - eighth - (increment * (j + 1));
+                            y = this.cw - eighth - (increment * (j + 1));
                             w = increment - eighth;
                             h = increment;
 
@@ -181,7 +181,7 @@ $(function(){
                             _.restore();
                             break;
                         case 3:
-                            x = 960 - increment;
+                            x = this.cw - increment;
                             y = eighth + (increment * j);
                             w = increment - eighth;
                             h = increment;
