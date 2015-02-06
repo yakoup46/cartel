@@ -1,13 +1,19 @@
 var spaces = [
     {
+        'name' : 'Go Bitch',
+        'type' : 'corner',
+        'icon' : '\uF122'
+    },
+    {
         'color' : 'purple',
         'name' : 'Cocaine',
         'price' : '900',
         'type' : 'property'
     },
     {
-        'name' : 'Community Whore',
-        'type' : 'pickup'
+        'name' : 'Whore',
+        'type' : 'pickup',
+        'icon' : '\uF182'
     },
     {
         'color' : 'purple',
@@ -16,14 +22,17 @@ var spaces = [
         'type' : 'property'
     },
     {
-        'name' : 'Eye for an Eye',
+        'name' : 'Drug Tax',
         'type' : 'tax',
-        'price' : '3000'
+        'price' : '3000',
+        'icon' : '\uF155'
     },
     {
-        'name' : 'Transport by Boat',
+        'name' : 'Boat',
         'price' : '3000',
-        'type' : 'transport'
+        'type' : 'transport',
+        'color' : 'black',
+        'icon' : '\uF21A'
     },
     {
         'color': 'blue',
@@ -32,8 +41,9 @@ var spaces = [
         'type' : 'property'
     },
     {
-        'name' : 'Russian Roulette',
-        'type' : 'pickup'
+        'name' : 'Roulette',
+        'type' : 'pickup',
+        'icon' : '\uF193'
     },
     {
         'color': 'blue',
@@ -48,15 +58,21 @@ var spaces = [
         'type' : 'property'
     },
     {
+        'name' : 'Jail Hombre',
+        'type' : 'corner',
+        'icon' : '\uF023'
+    },
+    {
         'color' : 'pink',
         'name' : 'Bar',
         'price' : '2000',
         'type' : 'property'
     },
     {
-        'name' : 'Hitman',
+        'name' : 'Tuition',
         'price' : '2250',
-        'type' : 'utility'
+        'type' : 'utility',
+        'icon' : '\uF19C'
     },
     {
         'color' : 'pink',
@@ -71,9 +87,11 @@ var spaces = [
         'type' : 'property'
     },
     {
-        'name' : 'Transport by Tunnel',
+        'name' : 'Subway',
         'price' : '3000',
-        'type' : 'transport'
+        'type' : 'transport',
+        'color' : 'black',
+        'icon' : '\uF239'
     },
     {
         'color' : 'orange',
@@ -82,8 +100,9 @@ var spaces = [
         'type' : 'property'
     },
     {
-        'name' : 'Community Whore',
-        'type' : 'pickup'
+        'name' : 'Whore',
+        'type' : 'pickup',
+        'icon' : '\uF182'
     },
     {
         'color' : 'orange',
@@ -97,6 +116,11 @@ var spaces = [
         'price' : '3000',
         'type' : 'property'
     },
+    {
+        'name' : 'Loot',
+        'type' : 'corner',
+        'icon' : '\uF219'
+    },
     // most wanted drug lords
     {
         'color' : 'red',
@@ -105,8 +129,9 @@ var spaces = [
         'type' : 'property'
     },
     {
-        'name' : 'Russian Roulette',
-        'type' : 'pickup'
+        'name' : 'Roulette',
+        'type' : 'pickup',
+        'icon' : '\uF193'
     },
     {
         'color' : 'red',
@@ -121,8 +146,10 @@ var spaces = [
         'type' : 'property'
     },
     {
-        'name' : 'Transport by Asshole',
-        'type' : 'transport'
+        'name' : 'Motorcycle',
+        'type' : 'transport',
+        'color' : 'black',
+        'icon' : '\uf21C'
     },
     // mexican food
     {
@@ -139,13 +166,20 @@ var spaces = [
     },
     {
         'name' : 'Drive-By',
-        'type' : 'utility'
+        'price' : '2250',
+        'type' : 'utility',
+        'icon' : '\uF0F9'
     },
     {
         'color' : 'yellow',
         'name' : 'Enchilada',
         'price' : '4000',
         'type' : 'property'
+    },
+    {
+        'name' : 'Busted Bitch',
+        'type' : 'corner',
+        'icon' : '\uF21B'
     },
     // richest mexicans
     {
@@ -161,8 +195,9 @@ var spaces = [
         'type' : 'property'
     },
     {
-        'name' : 'Community Whore',
-        'type' : 'pickup'
+        'name' : 'Whore',
+        'type' : 'pickup',
+        'icon' : '\uF182'
     },
     {
         'color' : 'green',
@@ -171,12 +206,15 @@ var spaces = [
         'type' : 'property'
     },
     {
-        'name' : 'Transport by Suitcase',
-        'type' : 'transport'
+        'name' : 'Suitcase',
+        'type' : 'transport',
+        'color' : 'black',
+        'icon' : '\uF0F2'
     },
     {
-        'name' : 'Russian Roulette',
-        'type' : 'pickup'
+        'name' : 'Roulette',
+        'type' : 'pickup',
+        'icon' : '\uF193'
     },
     {
         'color' : 'darkblue',
@@ -187,7 +225,8 @@ var spaces = [
     {
         'name' : 'Prostitute',
         'price' : '1500',
-        'type' : 'tax'
+        'type' : 'tax',
+        'icon' : '\uF155'
     },
     {
         'color' : 'darkblue',

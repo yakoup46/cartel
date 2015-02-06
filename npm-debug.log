@@ -1,0 +1,30 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node',
+1 verbose cli   '/usr/local/bin/npm',
+1 verbose cli   'install',
+1 verbose cli   'git@github.com:CreateJS/EaselJS.git' ]
+2 info using npm@2.1.11
+3 info using node@v0.10.33
+4 verbose node symlink /usr/local/bin/node
+5 warn package.json cartel@1.0.0 No repository field.
+6 warn package.json sass@0.5.0 No repository field.
+7 verbose stack Error: Unsupported URL Type: github.com:CreateJS/EaselJS.git
+7 verbose stack     at parseUrl (/usr/local/lib/node_modules/npm/node_modules/npm-package-arg/npa.js:173:13)
+7 verbose stack     at npa (/usr/local/lib/node_modules/npm/node_modules/npm-package-arg/npa.js:74:12)
+7 verbose stack     at resolver (/usr/local/lib/node_modules/npm/lib/install.js:756:42)
+7 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/slide/lib/async-map.js:52:35
+7 verbose stack     at Array.forEach (native)
+7 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/slide/lib/async-map.js:52:11
+7 verbose stack     at Array.forEach (native)
+7 verbose stack     at asyncMap (/usr/local/lib/node_modules/npm/node_modules/slide/lib/async-map.js:51:8)
+7 verbose stack     at /usr/local/lib/node_modules/npm/lib/install.js:655:5
+7 verbose stack     at /usr/local/lib/node_modules/npm/lib/install.js:324:22
+8 verbose cwd /Users/Jacob/Documents/Online/cartel
+9 error Darwin 13.3.0
+10 error argv "node" "/usr/local/bin/npm" "install" "git@github.com:CreateJS/EaselJS.git"
+11 error node v0.10.33
+12 error npm  v2.1.11
+13 error Unsupported URL Type: github.com:CreateJS/EaselJS.git
+14 error If you need help, you may report this error at:
+14 error     <http://github.com/npm/npm/issues>
+15 verbose exit [ 1, true ]

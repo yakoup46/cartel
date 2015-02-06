@@ -1,9 +1,25 @@
-body,html {
-    font-family: Arial;
+@font-face {
+    font-family: FontAwesome;
+    src: url(/fontawesome/fonts/fontawesome-webfont.woff);
 }
 
-#cartel {
-    border: 2px solid #000;
+/* latin */
+@font-face {
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Raleway'), url(http://fonts.gstatic.com/s/raleway/v9/QAUlVt1jXOgQavlW5wEfxQLUuEpTyoUstqEm5AMlJo4.woff2) format('woff2');
+}
+/* latin */
+@font-face {
+  font-family: 'Raleway-Bold';
+  font-style: normal;
+  font-weight: 600;
+  src: local('Raleway SemiBold'), local('Raleway-SemiBold'), url(http://fonts.gstatic.com/s/raleway/v9/xkvoNo9fC8O2RDydKj12bwzyDMXhdD8sAj6OAJTFsBI.woff2) format('woff2');
+}
+
+body,html {
+    font-family: FontAwesome;
 }
 
 #rotate {

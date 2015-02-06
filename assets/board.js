@@ -283,13 +283,74 @@ $(function(){
                 }
         }
 
+        this.drawTaxes = function(eighth, ctx, increment, side, i, j, cur, maxWidth){
+            var taxes = 'TAXES';
+            var words = cur.name.split(' ');
+            var price = cur.price + ' Pesos' || 0;
+
+            switch (side) {
+                case 0:
+                    x = this.cw - eighth - (increment * (j + 1));
+                    y = this.cw - increment;
+
+                    ctx.fillText(taxes, x + increment / 2, y - 20, maxWidth);
+                    for (var z = 0; z < words.length; z++) {
+                        ctx.fillText(price, x + increment / 2, y + increment - 5, maxWidth);
+                        ctx.fillText(words[z], x + increment / 2, y + increment / 3 + z * 12, maxWidth);
+                    }
+                    break;
+                case 1:
+                    x = eighth;
+                    y = this.cw - eighth - (increment * (j + 1));
+
+                    ctx.save();
+                    ctx.translate(x, y);
+                    ctx.rotate(Math.PI / 2);
+                    ctx.fillText(taxes, increment / 2, increment - 60, maxWidth);
+                    for (var z = 0; z < words.length; z++) {
+                        ctx.fillText(price, increment / 2, increment + 35, maxWidth);
+                        ctx.fillText(words[z], increment / 2, increment / 1.3 + z * 12, maxWidth);
+                    }
+                    ctx.restore();
+                    break;
+                case 2:
+                    x = eighth + (increment * j);
+                    y = eighth;
+
+                    ctx.save();
+                    ctx.translate(x, y);
+                    ctx.rotate(Math.PI);
+                    ctx.fillText(taxes, -increment / 2, increment - 60, maxWidth);
+                    for (var z = 0; z < words.length; z++) {
+                        ctx.fillText(price, -increment / 2, increment + 35, maxWidth);
+                        ctx.fillText(words[z], -increment / 2, increment - 15 + z * 12, maxWidth);
+                    }
+                    ctx.restore();
+                    break;
+                case 3:
+                    x = this.cw - increment;
+                    y = eighth + (increment * j);
+
+                    ctx.save();
+                    ctx.translate(x, y);
+                    ctx.rotate(-Math.PI / 2);
+                    ctx.fillText(taxes, -increment / 2, -increment + 60, maxWidth);
+                    for (var z = 0; z < words.length; z++) {
+                        ctx.fillText(price, -increment / 2, increment - 5, maxWidth);
+                        ctx.fillText(words[z], -increment / 2, increment / 2 - 15 + z * 12, maxWidth);
+                    }
+                    ctx.restore();
+                    break;
+            }
+        }
+
         this.drawPieces = function(eighth, ctx, increment){
             var side = 0;
             var j = 0;
             var maxWidth = increment - 10;
             var x,y,w,h;
 
-            ctx.font = '12px Arial';
+            ctx.font = '12px Helvetica';
             ctx.textAlign = 'center';
 
             // property colors and names
@@ -317,6 +378,7 @@ $(function(){
                         this.drawTransport(eighth, ctx, increment, side, i, j, cur, maxWidth);
                         break;
                     case 'tax':
+                        this.drawTaxes(eighth, ctx, increment, side, i, j, cur, maxWidth);
                         break;
                 }
 
