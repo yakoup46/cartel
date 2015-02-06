@@ -1,10 +1,41 @@
-<link rel="stylesheet" href="/output.css">
-<script src="/jquery.js"></script>
-<script src="/easeljs-0.8.0.min.js"></script>
-<script src="/spaces.js"></script>
-<script src="/cartel.js"></script>
+<!doctype html>
+<html>
+<head>
+    <link rel="stylesheet" href="/output.css">
+    <script src="/jquery.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/easeljs-0.8.0.min.js"></script>
+    <script src="/spaces.js"></script>
+    <script src="/cartel.js"></script>
+    <script src="/functional.js"></script>
 
-<div id="rotate">
-    <a href="#">rotate board</a>
-</div>
-<canvas id="cartel" width="800" height="800"></canvas>
+    <title>badass mottatruckin game - cartel</title>
+</head>
+<body>
+    <div id="rotate">
+        <a href="#">rotate board</a>
+    </div>
+
+    <canvas id="cartel" width="800" height="800"></canvas>
+
+    <div class="die-holder">
+        <div class="first">
+            <div class="die hide one"><span class="dot"></span></div>
+            <div class="die hide two"><span class="dot"></span></div>
+            <div class="die hide three"><span class="dot"></span></div>
+            <div class="die hide four"><span class="dot"></span></div>
+            <div class="die hide five"><span class="dot"></span></div>
+            <div class="die hide six"><span class="dot"></span></div>
+        </div>
+        <div class="secnd">
+            <div class="die hide one"><span class="dot"></span></div>
+            <div class="die hide two"><span class="dot"></span></div>
+            <div class="die hide three"><span class="dot"></span></div>
+            <div class="die hide four"><span class="dot"></span></div>
+            <div class="die hide five"><span class="dot"></span></div>
+            <div class="die hide six"><span class="dot"></span></div>
+        </div>
+    </div>
+    <div id="roll">ROLL</div>
+</body>
+</html>

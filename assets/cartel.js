@@ -32,12 +32,14 @@ $(function(){
             color: '#000',
             type: '14px FontAwesome'
         };
+        this.players = [];
 
         this.mappings = {};
 
         this.init = function(el, opts){
             this.board.enableMouseOver();
             this.drawBoard();
+            this.drawPlayers();
 
             return this;
         }
@@ -175,6 +177,39 @@ $(function(){
 
             drawHelpers.addToBoard(rect);
         }
+
+        this.drawPlayers = function(){
+            var circle = new createjs.Shape();
+            var g = circle.graphics;
+
+            g.ss(1).s('#000').f('#f90').dc(0, 0, 10);
+
+            circle.shadow = new createjs.Shadow('#000', 2, 2, 10);
+            circle.name = this.players.length;
+            circle.x = circle.y = 725;
+
+            circle.on('movepiece', function(evt){
+                var target = evt.currentTarget;
+                var location = _.players[target.name].location;
+                console.log(evt);
+                var x = _.cd + 64 * location;
+                var y = 725;
+                
+                evt.currentTarget.x = x;
+                evt.currentTarget.y = y;
+
+                _.board.update();
+            });
+
+            _.board.update();
+
+            drawHelpers.addToBoard(circle);
+
+            this.players.push({
+                'location' : 0,
+                'shape' : circle
+            });
+        };
 
         var drawHelpers = {
             addToBoard: function(){
