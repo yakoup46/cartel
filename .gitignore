@@ -3,6 +3,3 @@ bower_components/*
 node_modules/*
 assets/.sass-cache
 assets/jquery.js
-./assets/assets
-./assets/bcomps
-./lib
