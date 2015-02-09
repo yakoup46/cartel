@@ -12,6 +12,8 @@ $(function(){
     var Functional = function(){
 
         var _ = this;
+        this.board = ini.board;
+        this.players = ini.players;
 
         this.init = function(){
             this.roll();
@@ -36,6 +38,13 @@ $(function(){
                 $('.die').addClass('hide');
                 $('.first .die').eq(f).toggleClass('hide');
                 $('.secnd .die').eq(s).toggleClass('hide');
+
+                _.players[0].prevLocation = _.players[0].location % 40;
+                _.players[0].location += f + s + 2;
+                _.players[0].doubles = (f === s) ? ++_.players[0].doubles : 0;
+                _.players[0].lastRoll = f + s + 2;
+
+                _.players[0].shape.dispatchEvent('movepiece');
             });
         }
 

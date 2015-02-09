@@ -190,13 +190,24 @@ $(function(){
 
             circle.on('movepiece', function(evt){
                 var target = evt.currentTarget;
-                var location = _.players[target.name].location;
-                console.log(evt);
-                var x = _.cd + 64 * location;
-                var y = 725;
+                var player = _.players[target.name];
+                var location = player.location % 40;
+
+                if(location === 30){
+                    location = player.location = 10;
+                    player.jailed = true;
+                }
+
+                if((player.prevLocation + player.lastRoll) >= 40){
+                    player.cash += 3000;
+                }
+
+                player.prevLocation = (player.prevLocation + player.lastRoll) % 40;
+
+                var position = spaces[location].position[target.name];
                 
-                evt.currentTarget.x = x;
-                evt.currentTarget.y = y;
+                target.x = position[0];
+                target.y = position[1];
 
                 _.board.update();
             });
@@ -207,7 +218,11 @@ $(function(){
 
             this.players.push({
                 'location' : 0,
-                'shape' : circle
+                'prevLocation' : 0,
+                'shape' : circle,
+                'cash' : 25000,
+                'doubles' : 0,
+                'jailed' : false
             });
         };
 

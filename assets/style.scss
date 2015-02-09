@@ -1,6 +1,6 @@
 @font-face {
     font-family: FontAwesome;
-    src: url(/fontawesome/fonts/fontawesome-webfont.woff);
+    src: url(/bcomps/fontawesome/fonts/fontawesome-webfont.woff);
 }
 
 /* latin */
@@ -20,12 +20,6 @@
 
 body,html {
     font-family: FontAwesome, Raleway;
-}
-
-#rotate {
-    position: fixed;
-    top: 20px;
-    right: 20px;
 }
 
 #roll {
